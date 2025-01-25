@@ -123,7 +123,7 @@ const ToDo = () =>{
                     </div>
                   </div>
       </div>
-      <footer>Open <a href="https://github.com/AnnikaLaanemets/todo-list" target="blank">source</a> code by Annika Laanemets</footer>
+      <footer>Open <a href="https://github.com/AnnikaLaanemets/ToDo" target="blank title="source code on github">source</a> code by Annika Laanemets</footer>
       </div>
   );
 }
