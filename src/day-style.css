@@ -62,11 +62,11 @@ label {
   background-color: #e7ceb0;
   border: none;
   padding: 4px; 
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border-radius: 25px; 
   float: right;
-  font-size: 12px;
+  font-size: 10px;
   opacity: 0.7;
 }
 

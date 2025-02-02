@@ -2,30 +2,17 @@ import { useState, useEffect } from "react";
 import "./day-style.css";
 import TaskRow from "./Task";
 import { Task, Tasks } from "./types";
+import formatDate from "./utils/formatDate";
+import DateTime from "./DateTime";
+import getWeekDay from "./utils/getWeekDay";
 
-
-const formatDate = (date: Date) => {
-  return date.toISOString().split('T')[0];
-}
-
-const nextDay = (date: string) => {
-  const startDate = new Date(date);
-  startDate.setDate(startDate.getDate() + 1);
-  return formatDate(startDate);
-}
-const previewsDay = (date: string) => {
-  const startDate = new Date(date);
-  startDate.setDate(startDate.getDate() - 1);
-  return formatDate(startDate);
-}
 
 const ToDo = () =>{
-  
-  const [date, setDate] = useState<string>(formatDate(new Date()));
+
+  const [date, setDate] = useState<string>(formatDate(new Date())); 
   const [tasks, setTasks] = useState<Tasks>([]);
-  const weekDay = new Date(date).toLocaleDateString('en-US', { weekday: 'long' });
-  const localeDate = new Date(date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   const [inputValue, setInputValue] = useState<string>('');
+
   
   const selectedDateTasks = tasks.filter(task => task.date === date);
   const saveTasks = (tasks:Tasks) => {
@@ -65,16 +52,6 @@ const ToDo = () =>{
     saveTasks(updatedTasks);
   }
 
-  const handleNextDay = () => {
-    setDate(nextDay(date));
-  }
-  const handlePreviewsDay = () => {
-    setDate(previewsDay(date));
-  }
-  const handleToday = () => {
-    setDate(formatDate(new Date()));
-  }
-
   
   // Load tasks from local storage when the component mounts
   useEffect(() => {
@@ -88,21 +65,11 @@ const ToDo = () =>{
     <div>
       <div className="container">
                   <header>
-                    <h2>Things to Do</h2>
-                    <div className="row">
-                      <div>
-                          <span  className="pointer" onClick={handlePreviewsDay} title="Previous Day">
-                            &#11164;
-                          </span>
-                      </div>
-                      <h4 className="pointer" onClick={handleToday}>{localeDate}</h4>
-                      <div>
-                         <span className="pointer" onClick={handleNextDay} title="Next Day">
-                            &#11166;
-                          </span>
-                      </div>
-                    </div>
-                    <h3>{weekDay}</h3>
+                  <h2>Things to Do</h2>
+                    <DateTime 
+                      date={date}
+                      setDate={setDate}
+                    />
                   </header>
                   <div>        
                   <form onSubmit={handleTaskCreate}>
@@ -110,7 +77,7 @@ const ToDo = () =>{
                         type="text"
                         className="task-input"
                         name='name'
-                        placeholder={`Add task for ${weekDay}`}
+                        placeholder={`Add task for ${getWeekDay(date)}`}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                       />
