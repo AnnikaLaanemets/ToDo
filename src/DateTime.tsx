@@ -2,6 +2,10 @@ import { FC } from "react";
 import "./day-style.css";
 import formatDate from "./utils/formatDate";
 import getWeekDay from "./utils/getWeekDay";
+import LeftArrow from '../public/left-arrow.png';
+import RightArrow from '../public/right-arrow.png';
+
+
 
 type Props =
 {
@@ -34,17 +38,13 @@ const  DateTime:FC<Props> = ({date,setDate}) => {
 
   return ( <><div className="row">
   <div>
-      <span  className="pointer" onClick={handlePreviewsDay} title="Previous Day">
-      ⮜
-      </span>
+      <img width={16}  className="pointer" onClick={handlePreviewsDay} alt="Previous Day"  src={LeftArrow}/>
   </div>
-
   <h4 className="pointer" onClick={handleToday}>{localeDate}</h4>
 
   <div>
-     <span className="pointer" onClick={handleNextDay} title="Next Day">
-     ⮞
-      </span>
+  <img width={16} className="pointer" onClick={handleNextDay} alt="Next Day"  src={RightArrow}/>
+
   </div>
 
 </div>
